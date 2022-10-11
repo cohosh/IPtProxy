@@ -72,6 +72,13 @@ FOUNDATION_EXPORT long IPtProxyObfs4Port(void);
 FOUNDATION_EXPORT NSString* _Nonnull IPtProxyObfs4ProxyVersion(void);
 
 /**
+ * Obfs4proxyLogFile - The log file name used by Obfs4proxy.
+
+The Obfs4proxy log file can be found at `filepath.Join(StateLocation, Obfs4proxyLogFile())`.
+ */
+FOUNDATION_EXPORT NSString* _Nonnull IPtProxyObfs4proxyLogFile(void);
+
+/**
  * ScramblesuitPort - Port where Obfs4proxy will provide its Scramblesuit service.
 Only use this property after calling StartObfs4Proxy! It might have changed after that!
  */
@@ -84,7 +91,7 @@ Only use this property after calling StartSnowflake! It might have changed after
 FOUNDATION_EXPORT long IPtProxySnowflakePort(void);
 
 /**
- * SnowflakeVersion  - The version of Snowflake bundled with IPtProxy.
+ * SnowflakeVersion - The version of Snowflake bundled with IPtProxy.
  */
 FOUNDATION_EXPORT NSString* _Nonnull IPtProxySnowflakeVersion(void);
 
@@ -103,6 +110,7 @@ Only use the port properties after calling this, they might have been changed!
 @param proxy HTTP, SOCKS4 or SOCKS5 proxy to be used behind Obfs4proxy. E.g. "socks5://127.0.0.1:12345"
 
 @return Port number where Obfs4Proxy will listen on for Obfs4(!), if no error happens during start up.
+
 	If you need the other ports, check MeekPort, Obfs2Port, Obfs3Port and ScramblesuitPort properties!
  */
 FOUNDATION_EXPORT long IPtProxyStartObfs4Proxy(NSString* _Nullable logLevel, BOOL enableLogging, BOOL unsafeLogging, NSString* _Nullable proxy);
@@ -117,7 +125,8 @@ FOUNDATION_EXPORT long IPtProxyStartObfs4Proxy(NSString* _Nullable logLevel, BOO
 @param front Front domain.
 
 @param ampCache OPTIONAL. URL of AMP cache to use as a proxy for signaling.
-       Only needed when you want to do the rendezvous over AMP instead of a domain fronted server.
+
+	Only needed when you want to do the rendezvous over AMP instead of a domain fronted server.
 
 @param logFile Name of log file. OPTIONAL. Defaults to no log.
 
@@ -153,8 +162,9 @@ FOUNDATION_EXPORT long IPtProxyStartSnowflake(NSString* _Nullable ice, NSString*
 @param unsafeLogging Prevent logs from being scrubbed.
 
 @param clientConnected A delegate which is called when a client successfully connected.
-      Will be called on its own thread! You will need to switch to your own UI thread,
-      if you want to do UI stuff!! OPTIONAL
+
+	Will be called on its own thread! You will need to switch to your own UI thread,
+	if you want to do UI stuff!! OPTIONAL
  */
 FOUNDATION_EXPORT void IPtProxyStartSnowflakeProxy(long capacity, NSString* _Nullable broker, NSString* _Nullable relay, NSString* _Nullable stun, NSString* _Nullable natProbe, NSString* _Nullable logFile, BOOL keepLocalAddresses, BOOL unsafeLogging, id<IPtProxySnowflakeClientConnected> _Nullable clientConnected);
 
